@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timedown</title>
+    <style>
+        body{
+            text-align: center;
+            color: #464646;
+        }
+        .t{
+            padding-top: 2em;
+            font-weight: bold;
+            color: #8baf9b;
+            font-size: 48px;
+        }
+        .t2{
+            margin-bottom: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="t">Timedown.js</div>
+    <div class="t2">简单，易用倒计时小工具 ⏰</div>
+    <h1 class="time"></h1>
+    
+    <script type="module">
+
+        import Timedown from './timedown.js';
+
+        let timer = new Timedown({
+            id: 1,
+            endTime: Date.now() + 1000 * 60 * 1,
+            endText: 'ok',
+            selector: '.time',
+            endCallback: handleTimeEnd
+        })
+
+        function handleTimeEnd(id){
+            alert(`倒计时${id}号已结束！`)
+        }
+
+    </script>
+</body>
+</html>
