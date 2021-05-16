@@ -9,37 +9,64 @@
         body{
             text-align: center;
             color: #464646;
+            padding: 0 20%;
         }
         .t{
-            padding-top: 2em;
+            padding-top: 1em;
             font-weight: bold;
             color: #8baf9b;
             font-size: 48px;
         }
         .t2{
-            margin-bottom: 60px;
+            margin-bottom: 0px;
+        }
+
+        .item{
+            /* margin-bottom: 100px; */
+            padding: 100px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .item-label{
+            color: #a5a5a5;
         }
     </style>
 </head>
 <body>
     <div class="t">Timedown.js</div>
     <div class="t2">简单，易用倒计时小工具 ⏰</div>
-    <h1 class="time"></h1>
+
+    <div class="item">
+        <div class="item-label">默认</div>
+        <h1 class="time1"></h1>
+    </div>
+    <div class="item">
+        <div class="item-label">更改格式</div>
+        <h1 class="time2"></h1>
+    </div>
+    
     
     <script type="module">
 
         import Timedown from './timedown.js';
 
-        let timer = new Timedown({
+        let timer2 = new Timedown({
             id: 1,
             endTime: Date.now() + 1000 * 60 * 1,
             endText: 'ok',
-            selector: '.time',
+            selector: '.time1',
+            endCallback: handleTimeEnd
+        })
+        let timer3 = new Timedown({
+            id: 2,
+            endTime: Date.now() + 1000 * 60 * 60 * 24 * 10,
+            endText: 'ok',
+            selector: '.time2',
+            format: '⏰: {d}个日落与日出，{h}个小时，{mm}分{ss}秒',
             endCallback: handleTimeEnd
         })
 
         function handleTimeEnd(id){
-            alert(`倒计时${id}号已结束！`)
+            console.log(`倒计时${id}号已结束！`)
         }
 
     </script>
