@@ -28,15 +28,6 @@ export default class Timedown {
             return
         }
 
-        this.hasNode = false;
-        if(selector){
-            if((this.targetNodes = document.querySelectorAll(selector)).length === 0){
-                console.error('The node cannot be found: ' + selector);
-                return
-            }
-            this.hasNode = true;
-        }
-
         this.config = {};
         this.config.id = id;
         this.config.endTime = endTime;
@@ -44,6 +35,7 @@ export default class Timedown {
         this.config.interval = interval;
         this.config.format = format;
         this.config.endCallback = endCallback;
+        this.config.selector = selector;
         this.isOver = false;
         this.value = '';
         this.day = 0;
@@ -51,6 +43,7 @@ export default class Timedown {
         this.m = 0;
         this.s = 0;
 
+        this._handleSelector();
         this.start();
     }
 
@@ -74,8 +67,16 @@ export default class Timedown {
     }
 
     _upateNode(){
-        for (let i = 0; i < this.targetNodes.length; i++) {
-            this.targetNodes[i].innerText = this.value;
+        if(!this.targetNodes){
+            return
+        }
+        for (const key in this.targetNodes) {
+            if (Object.hasOwnProperty.call(this.targetNodes, key)) {
+                const nodes = this.targetNodes[key];
+                for (let i = 0; i < nodes.length; i++) {
+                    if(this[key] != null) nodes[i].innerText = this[key];
+                }
+            }
         }
     }
 
@@ -131,5 +132,61 @@ export default class Timedown {
 
         return format
     }
+
+    _handleSelector(){
+        const selector = this.config.selector;
+        this.targetNodes = {};
+
+        if(!selector){
+            this.hasNode = false;
+            this.targetNodes = null;
+            return
+        }
+
+        // 单个选择器
+        if(
+            typeof selector === 'string'
+            && (this.targetNodes.value = document.querySelectorAll(selector)).length === 0
+        ){
+            this.targetNodes = null;
+            console.error('The node cannot be found: ' + selector);
+        }
+
+        // 多个选择器
+        if(Object.prototype.toString.call(selector) === '[object Object]'){
+            // 空对象
+            if(isEmptyObject(selector)){
+                this.hasNode = false;
+                this.targetNodes = null;
+                return
+            }
+
+            for (const key in selector) {
+                if (Object.hasOwnProperty.call(selector, key)) {
+                    const str = selector[key];
+                    if((this.targetNodes[key] = document.querySelectorAll(str)).length === 0){
+                        delete this.targetNodes[key];
+                        console.error('The node cannot be found: ' + str);
+                    }
+                }
+            }
+        }
+
+        if(!this.targetNodes || isEmptyObject(this.targetNodes)){
+            this.hasNode = false;
+            this.targetNodes = null;
+        }else{
+            this.hasNode = true;
+        }
+    }
+}
+
+function isEmptyObject( obj ) {
+    let name;
+
+    for ( name in obj ) {
+        return false;
+    }
+    return true;
 }
 
