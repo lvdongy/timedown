@@ -24,9 +24,7 @@
                     endTime[3] || 0,
                     endTime[5] || 0,
                 ).getTime();
-            }else if(typeof endTime === 'number'){
-                endTime = endTime;
-            }else{
+            }else if(typeof endTime !== 'number'){
                 console.error('Parameter type error: endTime');
                 return
             }
