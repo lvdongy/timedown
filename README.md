@@ -12,25 +12,23 @@
 
 # 引入
 
-直接拷贝dist文件夹下对应的js文件到你的项目里引入即可
+配合打包工具
+```
+npm i @lvdongy/timedown
+```
 
-timedown.min.js
+或者使用script标签引入时，可直接拷贝dist文件夹下的 `timedown.min.js` 到你的项目里引入即可
+
 ```javascript
-<script src="./dist/timedown.min.js"></script>
+<script src="./path/timedown.min.js"></script>
 <script>
   let timer = new Timedown(options);
 </script>
 ```
-timedown.esm.js
-```javascript
-import Timedown from 'timedown.esm.js'
-
-let timer = new Timedown(options);
-```
 
 <br>
 
-# options
+# 配置
 ```javascript
 let timer = new Timedown(options);
 ```

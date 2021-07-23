@@ -1,11 +1,12 @@
 {
-  "name": "timedown",
-  "version": "1.0.0",
+  "name": "@lvdongy/timedown",
+  "version": "1.1.0",
   "description": "简易倒计时工具",
-  "main": "timedown.js",
+  "main": "dist/timedown.umd.js",
+  "module": "dist/timedown.esm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/babel dist/timedown.js --out-file timedown.js --presets=@babel/env && uglifyjs timedown.js --compress --mangle --output dist/timedown.min.js && node clear.js"
+    "build": "rollup -c rollup.config.js"
   },
   "repository": {
     "type": "git",
@@ -22,10 +23,15 @@
   },
   "homepage": "https://github.com/lvdongy/timedown#readme",
   "devDependencies": {
-    "@babel/cli": "^7.14.3",
-    "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.2",
-    "uglify-js": "^3.13.7"
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2"
   },
   "dependencies": {}
 }

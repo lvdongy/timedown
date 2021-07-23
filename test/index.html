@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timedown</title>
+    <style>
+        body{
+            text-align: center;
+            color: #464646;
+            padding: 0 20%;
+        }
+        @media screen and (max-width: 768px) {
+            body{
+                padding: 0 5%;
+            }
+        }
+        .t{
+            padding-top: 1em;
+            font-weight: bold;
+            color: #8baf9b;
+            font-size: 48px;
+        }
+        .t2{
+            margin-bottom: 0px;
+        }
+
+        .item{
+            /* margin-bottom: 100px; */
+            padding: 100px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .item-label{
+            color: #a5a5a5;
+        }
+        .time3-d{
+            font-size: 80px;
+            font-weight: bold;
+            color: #729ed6;
+        }
+        .time3-h{
+            font-size: 60px;
+            font-weight: 600;
+            color: #f1a374;
+        }
+        .time3-m{
+            font-size: 40px;
+            font-weight: 400;
+            color: #328e5b;
+        }
+        .time3-s{
+            font-size: 20px;
+            color: #989898;
+        }
+    </style>
+</head>
+<body>
+    <div class="t">Timedown.js</div>
+    <div class="t2">简单，易用倒计时小工具 ⏰</div>
+
+    <div class="item">
+        <div class="item-label">默认</div>
+        <h1 class="time1"></h1>
+    </div>
+    <div class="item">
+        <div class="item-label">更改格式</div>
+        <h1 class="time2"></h1>
+    </div>
+
+    <div class="item">
+        <div class="item-label">单独控制</div>
+        <span class="time3-d"></span>
+        <span>日</span>
+        <span class="time3-h"></span>
+        <span>:</span>
+        <span class="time3-m"></span>
+        <span>:</span>
+        <span class="time3-s"></span>
+    </div>
+
+    <script src="../dist/timedown.min.js"></script>
+    <script type="module">
+
+        // import Timedown from '../dist/timedown.esm.js';
+
+        let timer1 = new Timedown({
+            id: 1,
+            endTime: Date.now() + 1000 * 60 * 1,
+            endText: 'ok',
+            selector: '.time1',
+            endCallback: handleTimeEnd
+        })
+        let timer2 = new Timedown({
+            id: 2,
+            endTime: Date.now() + 1000 * 60 * 60 * 24 * 10,
+            endText: 'ok',
+            selector: '.time2',
+            format: '⏰: {d}个日落与日出，{h}个小时，{mm}分{ss}秒',
+            endCallback: handleTimeEnd
+        })
+        let timer3= new Timedown({
+            id: 3,
+            endTime: Date.now() + 1000 * 60 * 60 * 24 * 10 + (1000 * 60 * 62 + 20),
+            selector: {
+                day: '.time3-d',
+                h: '.time3-h',
+                m: '.time3-m',
+                s: '.time3-s'
+            },
+            // isNotFormatNode: true,
+            endCallback: handleTimeEnd
+        })
+
+        function handleTimeEnd(id){
+            console.log(`倒计时${id}号已结束！`)
+        }
+        
+
+    </script>
+</body>
+</html>
