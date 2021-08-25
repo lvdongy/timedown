@@ -18,8 +18,8 @@ export default class Timedown {
                 endTime[0],
                 endTime[1] - 1,
                 endTime[2] || 1,
-                endTime[4] || 0,
                 endTime[3] || 0,
+                endTime[4] || 0,
                 endTime[5] || 0,
             ).getTime();
         }else if(typeof endTime !== 'number'){
