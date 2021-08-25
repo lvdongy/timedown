@@ -1,6 +1,6 @@
 {
   "name": "@lvdongy/timedown",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "简易倒计时工具",
   "main": "dist/timedown.umd.js",
   "module": "dist/timedown.esm.js",
